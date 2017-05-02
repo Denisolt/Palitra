@@ -1,6 +1,7 @@
 from PIL import Image
 import sys, csv
 from resizeimage import resizeimage
+import math
 
 
 def rgb_to_hex(rgb):
@@ -26,7 +27,7 @@ im = Image.open(path)
 #im = resizeimage.resize_cover(im, [512, 512])
 pix = im.load()
 w, h = im.size # breaking the tuple into width and height in px
-im = resizeimage.resize_cover(im, [w/2, h/2])
+im = resizeimage.resize_cover(im, [math.sqrt(w), math.sqrt(2)])
 s = set() #creating a set
 print im.size # Get the width and hight of the image for iterating over
 
