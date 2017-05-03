@@ -3675,3 +3675,40 @@
 			}
 
 	}
+.shape { 
+  padding: 0px; 
+}
+.shape > div { 
+  margin: 20px 0; 
+}
+.shape > h2 { 
+  background: rgba(0,0,0,0.15); 
+  padding: 10px; 
+  width: 640px; 
+  text-indent: 60px; 
+  margin: 0px 0 0 -70px; 
+  position: relative;
+}
+.shape > h2 > a {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  font-size: 20px;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}

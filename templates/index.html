@@ -21,12 +21,15 @@
 									<h1 class="major">Welcome
 									to Palitra</h1>
 									<p>Palitra (from Russian: palette) is a project created by <a href="https://github.com/denisolt">Deni Shakhbulatov</a> that lets you upload the picture and displays the color pallete of it. 
-									The colors that appear the most will be displayed. </br>
-									Supported formats: png, jpeg, jpg. Enjoy!</p> </br></br></br>
+									The colors that appear the most will be displayed. The program will take sometime to run, so don't worry. Supported formats: png, jpeg, jpg.</br> Enjoy!</p> </br></br></br>
 
 									    <form method=post enctype=multipart/form-data>
-									      <p><input type=file name=file><p>
-									         <input type=submit value=Upload>
+									    
+									    <button href="#" onclick="document.getElementById('fileID').click(); return false;">Browse</button>
+										
+										<input type="file" id="fileID" style="visibility: hidden;" />
+
+									       <p>  <input type="submit" value="Upload"></p>
 									    </form>
 									
 								</div>
@@ -34,8 +37,10 @@
 
 						<!-- Panel (Spotlight) -->
 							<section class="panel spotlight medium right" id="first">
-								<div class="content span-7">
-									Uploaded picture goes here
+								<div class="content span-10">
+
+										<img src="static/images/image.jpg"; height="80%"; width="auto">
+								
 								</div>
 								<div class="image filtered tinted" data-position="top left">
 								</div>
@@ -44,7 +49,24 @@
 						<!-- Panel -->
 							<section class="panel color1">
 								<div class="intro joined">
-									the color pallete
+								{% for i in s %}
+									<div class="shape">
+										<style contenteditable>
+							#circle {
+								width: 50px;
+								height: 50px;
+								background: #{{i}};
+								-moz-border-radius: 50px;
+								-webkit-border-radius: 50px;
+								border-radius: 50px;
+							}
+/* Cleaner, but slightly less support: use "50%" as value */
+							</style>
+							<div id="circle" style="background-color: #{{i}}"></div>
+				
+				
+				</div>
+								{% endfor %}
 								</div>
 							</section>
 
