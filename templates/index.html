@@ -25,11 +25,15 @@
 
 									    <form method=post enctype=multipart/form-data>
 									    
-									    <button href="#" onclick="document.getElementById('fileID').click(); return false;">Browse</button>
+									    <button name=file href="#" onclick="document.getElementById('fileID').click(); return false;">Browse</button>
 										
 										<input type="file" id="fileID" style="visibility: hidden;" />
 
 									       <p>  <input type="submit" value="Upload"></p>
+									    </form>
+									       <form method=post enctype=multipart/form-data>
+									      <p><input type=file name=file><p>
+									         <input type=submit value=Upload>
 									    </form>
 									
 								</div>
@@ -47,9 +51,9 @@
 							</section>
 
 						<!-- Panel -->
-							<section class="panel color1">
-								<div class="intro joined">
-								{% for i in s %}
+							<section class="panel color1"; style="overflow-y: scroll;">
+								<div class="intro joined"; style="overflow-y: scroll;">
+								{% for i in x %}
 									<div class="shape">
 										<style contenteditable>
 							#circle {
@@ -62,7 +66,7 @@
 							}
 /* Cleaner, but slightly less support: use "50%" as value */
 							</style>
-							<div id="circle" style="background-color: #{{i}}"></div>
+							<div id="circle" style="background-color: #{{i}}"> {{i}} </div>
 				
 				
 				</div>
