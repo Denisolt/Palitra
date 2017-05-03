@@ -37,18 +37,40 @@ def check(val):
 im = Image.open('static/images/image.jpg')
 pix = im.load()
 w, h = im.size # breaking the tuple into width and height in px
-#im = resizeimage.resize_cover(im, [w/2, h/2])
+
+im.save('static/images/image.jpg')
+im = Image.open('static/images/image.jpg')
+pix = im.load()
+w, h = im.size # breaking the tuple into width and height in px
+print im.size
+
 s = set() #creating a set
-for x in range(0, w/4):
-    for y in range(0, h/4):
+for x in range(0, w/2):
+    for y in range(0, h/2):
         hex = rgb_to_hex(pix[x,y]) #converting set to hex and storing it
         s.add(hex)
 s = sorted(s) #sorting out the s set
 x = check(s)
+#x = s
 print x
 
+def GetnewColors():
+    im = Image.open('static/images/image.jpg')
+    pix = im.load()
+    w, h = im.size # breaking the tuple into width and height in px
+    print im.size
+
+    s = set() #creating a set
+    for x in range(0, w/2):
+        for y in range(0, h/2):
+            hex = rgb_to_hex(pix[x,y]) #converting set to hex and storing it
+            s.add(hex)
+    s = sorted(s) #sorting out the s set
+    x = check(s)
+    return x
+
 @app.route('/', methods=['GET', 'POST'])
-def upload_file():
+def upload_file(x=x):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -66,6 +88,8 @@ def upload_file():
             
             im = Image.open(file.filename)
             pix = im.load()
+            im = resizeimage.resize_cover(im, [w, h])
+
             im.save('static/images/image.jpg')
             #w, h = im.size # breaking the tuple into width and height in px
             #im = resizeimage.resize_cover(im, [w/2, h/2])
@@ -77,7 +101,9 @@ def upload_file():
             #s = sorted(s) #sorting out the s set
             #x=check(s)
             #print x
-        return redirect(url_for('upload_file',filename=filename))
+            x = GetnewColors()
+        return render_template('index.html', x = x)
+    x = GetnewColors()
     return render_template('index.html', x = x)
 
 

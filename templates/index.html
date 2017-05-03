@@ -25,15 +25,17 @@
 
 									    <form method=post enctype=multipart/form-data>
 									    
-									    <button name=file href="#" onclick="document.getElementById('fileID').click(); return false;">Browse</button>
+									    <!-- <button name=file href="#" onclick="document.getElementById('fileID').click(); return false;">Browse</button> 
 										
-										<input type="file" id="fileID" style="visibility: hidden;" />
+										<input type="file" id="fileID" style="visibility: hidden;">
 
-									       <p>  <input type="submit" value="Upload"></p>
-									    </form>
-									       <form method=post enctype=multipart/form-data>
-									      <p><input type=file name=file><p>
-									         <input type=submit value=Upload>
+									       <p><input type="submit" value="Upload"></p>
+									    </form> -->
+
+									    <form method=post enctype=multipart/form-data>
+
+									      	   <input type=file name=file style="">
+									      	<p><input type=submit value=Upload></p>
 									    </form>
 									
 								</div>
@@ -66,7 +68,7 @@
 							}
 /* Cleaner, but slightly less support: use "50%" as value */
 							</style>
-							<div id="circle" style="background-color: #{{i}}"> {{i}} </div>
+							<div id="circle" style="background-color: #{{i}}"> </div>
 				
 				
 				</div>
