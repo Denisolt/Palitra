@@ -2,10 +2,12 @@ import os,csv
 from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
+import struct
 from PIL import Image
-import sys, csv
-from resizeimage import resizeimage
-import math
+import scipy
+import scipy.misc
+import scipy.cluster
+import numpy as np
 
 UPLOAD_FOLDER = os.path.dirname(os.path.realpath(__file__))
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'JPG'])
@@ -17,56 +19,52 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def rgb_to_hex(rgb):
-    return '%02x%02x%02x' % rgb
 
-def check(val):
-    final = set()
-    with open('AcceptedColors.csv') as csvfile:
-        color = csv.reader(csvfile, delimiter=',', quotechar='|')
-        next(color)
-        for row in color:
-            name = (row[0])
-            hexdec = (row[1])
-            for col in val:
-                if col == hexdec.lower():
-                    final.add(col)
-    return final
+def getcol(codes, NUM_CLUSTERS):
+    s = set()
+    for c in range(0, NUM_CLUSTERS):
+        peak = codes[c]
+        peak = peak.astype(int)
+        colour = ''.join(format(c, '02x') for c in peak)
+        final = ('#%s' % colour)
+        s.add(final)
+    return s
 
-
+NUM_CLUSTERS = 5
 im = Image.open('static/images/image.jpg')
-pix = im.load()
-w, h = im.size # breaking the tuple into width and height in px
+im = im.resize((150, 150))
 
-im.save('static/images/image.jpg')
-im = Image.open('static/images/image.jpg')
-pix = im.load()
-w, h = im.size # breaking the tuple into width and height in px
-print im.size
+ar = scipy.misc.fromimage(im)
+shape = ar.shape
+ar = ar.reshape(scipy.product(shape[:2]), shape[2])
+codes, dist = scipy.cluster.vq.kmeans(ar.astype(float), NUM_CLUSTERS)
 
-s = set() #creating a set
-for x in range(0, w/2):
-    for y in range(0, h/2):
-        hex = rgb_to_hex(pix[x,y]) #converting set to hex and storing it
-        s.add(hex)
-s = sorted(s) #sorting out the s set
-x = check(s)
-#x = s
+vecs, dist = scipy.cluster.vq.vq(ar, codes)         # assign codes
+counts, bins = scipy.histogram(vecs, len(codes))    # count occurrences
+s = set()
+s = counts
+
+x = set()
+x = getcol(codes, NUM_CLUSTERS)
 print x
 
 def GetnewColors():
+    NUM_CLUSTERS = 7
     im = Image.open('static/images/image.jpg')
-    pix = im.load()
-    w, h = im.size # breaking the tuple into width and height in px
-    print im.size
+    im = im.resize((150, 150))
 
-    s = set() #creating a set
-    for x in range(0, w/2):
-        for y in range(0, h/2):
-            hex = rgb_to_hex(pix[x,y]) #converting set to hex and storing it
-            s.add(hex)
-    s = sorted(s) #sorting out the s set
-    x = check(s)
+    ar = scipy.misc.fromimage(im)
+    shape = ar.shape
+    ar = ar.reshape(scipy.product(shape[:2]), shape[2])
+    codes, dist = scipy.cluster.vq.kmeans(ar.astype(float), NUM_CLUSTERS)
+
+    vecs, dist = scipy.cluster.vq.vq(ar, codes)         # assign codes
+    counts, bins = scipy.histogram(vecs, len(codes))    # count occurrences
+    s = set()
+    s = counts
+
+    x = set()
+    x = getcol(codes, NUM_CLUSTERS)
     return x
 
 @app.route('/', methods=['GET', 'POST'])
@@ -88,19 +86,7 @@ def upload_file(x=x):
             
             im = Image.open(file.filename)
             pix = im.load()
-            im = resizeimage.resize_cover(im, [w, h])
-
-            im.save('static/images/image.jpg')
-            #w, h = im.size # breaking the tuple into width and height in px
-            #im = resizeimage.resize_cover(im, [w/2, h/2])
-            #s = set() #creating a set
-            #for x in range(0, w/2):
-            #    for y in range(0, h/2):
-            #        hex = rgb_to_hex(pix[x,y]) #converting set to hex and storing it
-            #        s.add(hex)
-            #s = sorted(s) #sorting out the s set
-            #x=check(s)
-            #print x
+            im = im.resize((150, 150))
             x = GetnewColors()
         return render_template('index.html', x = x)
     x = GetnewColors()

@@ -55,16 +55,16 @@
 							<section class="panel spotlight medium right" id="first">
 								<div class="content span-10">
 
-										<img src="static/images/image.jpg"; height="80%"; width="auto">
-								
+										<img src="static/images/image.jpg"; height="100%">
+
 								</div>
 								<div class="image filtered tinted" data-position="top left">
 								</div>
 							</section>
 
 						<!-- Panel -->
-							<section class="panel color1"; style="overflow-y: scroll;">
-								<div class="intro joined"; style="overflow-y: scroll;">
+							<section class="panel color1";>
+								<div class="intro joined";>
 								{% for i in x %}
 									<div class="shape">
 										<style contenteditable>
@@ -78,12 +78,15 @@
 							}
 /* Cleaner, but slightly less support: use "50%" as value */
 							</style>
-							<div id="circle" style="background-color: #{{i}}"> </div>
+							<div>
+							<div id="circle" style="background-color: {{i}}"> </div>
 				
 				
 				</div>
 								{% endfor %}
 								</div>
+												</div>
+
 							</section>
 
 
