@@ -83,8 +83,8 @@ def upload_file(x=x):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
             im = Image.open(file.filename)
+            im.save('static/images/image.jpg')
             pix = im.load()
             im = im.resize((150, 150))
             x = GetnewColors()
