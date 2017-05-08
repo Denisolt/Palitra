@@ -54,12 +54,13 @@
 						<!-- Panel (Spotlight) -->
 							<section class="panel spotlight medium right" id="first">
 								<div class="content span-10">
-								<img src="data:image/png;base64, {% {uploadingimage} %} " height="90%" />
+								{% if uploadingimage %}
+								<img src="data:image/png;base64, {{uploadingimage}} " height="90%" />
 								</div>
+								{% endif %}
 								<div class="image filtered tinted" data-position="top left">
 								</div>
 							</section>
-
 						<!-- Panel -->
 							<section class="panel color1";>
 								<div class="intro joined";>
