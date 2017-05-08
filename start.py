@@ -29,6 +29,25 @@ def allowed_file(filename):
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def GetnewColors():
+    NUM_CLUSTERS = 7
+    im = Image.open('static/images/image.jpg')
+    im = im.resize((150, 150))
+
+    ar = scipy.misc.fromimage(im)
+    shape = ar.shape
+    ar = ar.reshape(scipy.product(shape[:2]), shape[2])
+    codes, dist = scipy.cluster.vq.kmeans(ar.astype(float), NUM_CLUSTERS)
+
+    vecs, dist = scipy.cluster.vq.vq(ar, codes)         # assign codes
+    counts, bins = scipy.histogram(vecs, len(codes))    # count occurrences
+    s = set()
+    s = counts
+    x = set()
+    x = getcol(codes, NUM_CLUSTERS)
+    return x
+
 NUM_CLUSTERS = 7
 im = Image.open('static/images/image.jpg')
 buffer = cStringIO.StringIO()
@@ -51,29 +70,8 @@ s = counts
 x = set()
 x = getcol(codes, NUM_CLUSTERS)
 
-
-
-
-def GetnewColors():
-    NUM_CLUSTERS = 7
-    im = Image.open('static/images/image.jpg')
-    im = im.resize((150, 150))
-
-    ar = scipy.misc.fromimage(im)
-    shape = ar.shape
-    ar = ar.reshape(scipy.product(shape[:2]), shape[2])
-    codes, dist = scipy.cluster.vq.kmeans(ar.astype(float), NUM_CLUSTERS)
-
-    vecs, dist = scipy.cluster.vq.vq(ar, codes)         # assign codes
-    counts, bins = scipy.histogram(vecs, len(codes))    # count occurrences
-    s = set()
-    s = counts
-    x = set()
-    x = getcol(codes, NUM_CLUSTERS)
-    return x
-
 @app.route('/', methods=['GET', 'POST'])
-def upload_file(x=x, im=uploadingimage):
+def upload_file(x=x, uploadingimage=uploadingimage):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -97,11 +95,9 @@ def upload_file(x=x, im=uploadingimage):
             uploadingimage = img_str
             im = im.resize((150, 150))
             x = GetnewColors()
-
-
-        return render_template('index.html', x = x, im=uploadingimage)
+        return render_template('index.html', x = x, uploadingimage=uploadingimage)
     x = GetnewColors()
-    return render_template('index.html', x = x, im=uploadingimage)
+    return render_template('index.html', x = x, uploadingimage=uploadingimage)
 
 
 if __name__ == '__main__':
