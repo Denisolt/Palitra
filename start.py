@@ -15,12 +15,15 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'JPG', 'PNG'])
 
 def getcol(codes, NUM_CLUSTERS):
     s = set()
-    for c in range(0, NUM_CLUSTERS):
-        peak = codes[c]
-        peak = peak.astype(int)
-        colour = ''.join(format(c, '02x') for c in peak)
-        final = ('#%s' % colour)
-        s.add(final)
+    try:
+        for c in range(0, NUM_CLUSTERS):
+            peak = codes[c]
+            peak = peak.astype(int)
+            colour = ''.join(format(c, '02x') for c in peak)
+            final = ('#%s' % colour)
+            s.add(final)
+    except IndexError:
+        getcol(codes, NUM_CLUSTERS-1)
     return s
 
 def allowed_file(filename):
@@ -85,6 +88,8 @@ def upload_file(x=x, uploadingimage=uploadingimage):
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            filename = 'file.jpg'
+            file.filename = 'file.jpg'
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             im = Image.open(file.filename)
             im.save('static/images/image.jpg')
