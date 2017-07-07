@@ -31,12 +31,19 @@
 									The colors that appear the most will be displayed. The program uses Flask, Scipy, Pillow and Numpy, if you are curious how it works, check <a href="https://github.com/Denisolt/Palitra">the Github repo.</a> Supported formats: png, jpeg, jpg.</p>
 
 							<ul class="actions vertical">
-								<li><form method=post enctype=multipart/form-data>
-									    <form method=post enctype=multipart/form-data>
-									      	   <label for="fl" class="button big wide smooth-scroll-middle" style="" name="file" type="file">Select File ...</label>
+								<form method=post enctype=multipart/form-data>
+									    
+									    <!-- <button name=file href="#" onclick="document.getElementById('fileID').click(); return false;">Browse</button> 
+										
+										<input type="file" id="fileID" style="visibility: hidden;">
+									       <p><input type="submit" value="Upload"></p>
+									    </form> -->
 
-<input id="fl" name="file" type="file">
-									      <li>	<p>
+									    <form method=post enctype=multipart/form-data>
+
+									      	   <input type=file name=file style="">
+									      	<p><input type=submit value=Upload></p>
+									    </form>	<p>
 									      	<input id="fl" style="display: none;" name="file" type="file"></p>
 									    </form></li> </br>
 							<section class="panel color1";>
