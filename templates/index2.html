@@ -1,14 +1,6 @@
+<!DOCTYPE HTML>
 
-<html>
-	<head>
-		<title>Palitra</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="static/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="static/assets/css/noscript.css" /></noscript>
-	</head>
-	
-  <script>
+ <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -19,89 +11,77 @@
 
 </script>
 
+<html>
+	<head>
+		<title>Palitra</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+	</head>
 	<body>
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
 
-				<!-- Wrapper -->
-					<div id="wrapper">
+				<!-- One -->
+					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+						<div class="content">
+							<h1>Palitra</h1>
+							<p>Palitra (from Russian: palette) is a project created by <a href="https://github.com/denisolt">Deni Shakhbulatov</a> that lets you upload the picture and displays the color pallete of it. 
+									The colors that appear the most will be displayed. The program uses Flask, Scipy, Pillow and Numpy, if you are curious how it works, check <a href="https://github.com/Denisolt/Palitra">the Github repo.</a> Supported formats: png, jpeg, jpg.</p>
 
-						<!-- Panel (Banner) -->
-							<section class="panel banner right">
-								<div class="content color0 span-3-75">
-									<h1 class="major">Welcome
-									to Palitra</h1>
-									<p>Palitra (from Russian: palette) is a project created by <a href="https://github.com/denisolt">Deni Shakhbulatov</a> that lets you upload the picture and displays the color pallete of it. 
-									The colors that appear the most will be displayed. The program uses Flask, Scipy, Pillow and Numpy, if you are curious how it works, check <a href="https://github.com/Denisolt/Palitra">the Github repo.</a> Supported formats: png, jpeg, jpg.</br> Enjoy!</p> </br></br></br>
-
+							<ul class="actions vertical">
+								<li><form method=post enctype=multipart/form-data>
 									    <form method=post enctype=multipart/form-data>
-									    
-									    <!-- <button name=file href="#" onclick="document.getElementById('fileID').click(); return false;">Browse</button> 
-										
-										<input type="file" id="fileID" style="visibility: hidden;">
-
-									       <p><input type="submit" value="Upload"></p>
-									    </form> -->
-
-									    <form method=post enctype=multipart/form-data>
-
-									      	   <input type=file name=file style="">
-									      	<p><input type=submit value=Upload></p>
-									    </form>
-									
-								</div>
-							</section>
-
-						<!-- Panel (Spotlight) -->
-							<section class="panel spotlight medium right" id="first">
-								<div class="content span-10">
-								{% if uploadingimage %}
-								<img src="data:image/png;base64, {{uploadingimage}} " height="90%" />
-								</div>
-								{% endif %}
-								<div class="image filtered tinted" data-position="top left">
-								</div>
-							</section>
-						<!-- Panel -->
+									      	   <input type=file name=file style="" class="button big wide smooth-scroll-middle">
+									      	   </li>
+									      <li>	<p><input type=submit value=Upload class="button big wide smooth-scroll-middle" ></p>
+									    </form></li> </br>
 							<section class="panel color1";>
-								<div class="intro joined";>
+								<div class="intro joined">
 								{% for i in x %}
 									<div class="shape">
 										<style contenteditable>
-							#circle {
-								width: 50px;
-								height: 50px;
-								background: #{{i}};
-								-moz-border-radius: 50px;
-								-webkit-border-radius: 50px;
-								border-radius: 50px;
-							}
-/* Cleaner, but slightly less support: use "50%" as value */
-							</style>
-							<div>
-							<div id="circle" style="background-color: {{i}}">  
-								<ul> <p>{{i}} </p></ul></div>
-				
-				
-				</div>
-								{% endfor %}
+											#circle {
+												width: 50px;
+												height: 50px;
+												background: #{{i}};
+												-moz-border-radius: 50px;
+												-webkit-border-radius: 50px;
+												border-radius: 50px;
+												
+											}
+								/* Cleaner, but slightly less support: use "50%" as value */
+										</style>
+								<div>
+							<div id="circle" style="background-color: {{i}}; float: left;"
+							></div>
+									{% endfor %}
 								</div>
-												</div>
 
-							</section>
+									</div>
+								</div>
+						</section>
 
+							</ul> </br></br></br></br></br></br>
+							<div class="copyright">&copy; Made by <a href="https://github.com/denisolt">Deni Shakh</a>. Thanks to <a href="https://github.com/msdocs">Mahmoud Saleh</a> for the front-end.</div>
+						</div>
 
-						<!-- Copyright -->
-							<div class="copyright">&copy; Made by <a href="https://github.com/denisolt">Deni Shakh</a>.</div>
-
-					</div>
+						<div class="image">
+							{% if uploadingimage %}
+							<img src="data:image/png;base64, {{uploadingimage}} " height="90%" />
+							{% endif %}
+						</div>
+					</section>
 
 			</div>
 
 		<!-- Scripts -->
 			<script src="static/assets/js/jquery.min.js"></script>
+			<script src="static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="static/assets/js/jquery.scrolly.min.js"></script>
 			<script src="static/assets/js/skel.min.js"></script>
+			<script src="static/assets/js/util.js"></script>
 			<script src="static/assets/js/main.js"></script>
 
 	</body>
