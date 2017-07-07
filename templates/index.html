@@ -28,7 +28,7 @@
 						<div class="content">
 							<h1>Palitra</h1>
 							<p>Palitra (from Russian: palette) is a project created by <a href="https://github.com/denisolt">Deni Shakhbulatov</a> that lets you upload the picture and displays the color pallete of it. 
-									The colors that appear the most will be displayed. The program uses Flask, Scipy, Pillow and Numpy, if you are curious how it works, check <a href="https://github.com/Denisolt/Palitra">the Github repo.</a> Supported formats: png, jpeg, jpg.</br> Enjoy!</p>
+									The colors that appear the most will be displayed. The program uses Flask, Scipy, Pillow and Numpy, if you are curious how it works, check <a href="https://github.com/Denisolt/Palitra">the Github repo.</a> Supported formats: png, jpeg, jpg.</p>
 
 							<ul class="actions vertical">
 								<li><form method=post enctype=multipart/form-data>
@@ -36,9 +36,9 @@
 									      	   <input type=file name=file style="" class="button big wide smooth-scroll-middle">
 									      	   </li>
 									      <li>	<p><input type=submit value=Upload class="button big wide smooth-scroll-middle" ></p>
-									    </form></li>
-									    <section class="panel color1";>
-								<div class="intro joined";>
+									    </form></li> </br>
+							<section class="panel color1";>
+								<div class="intro joined">
 								{% for i in x %}
 									<div class="shape">
 										<style contenteditable>
@@ -49,19 +49,24 @@
 												-moz-border-radius: 50px;
 												-webkit-border-radius: 50px;
 												border-radius: 50px;
+												
 											}
 								/* Cleaner, but slightly less support: use "50%" as value */
 										</style>
 								<div>
-							<div id="circle" style="background-color: {{i}}">  
-						</div>
+							<div id="circle" style="background-color: {{i}}; float: left;"
+							></div>
 									{% endfor %}
-									</div>
 								</div>
 
-							</section>
-							</ul>
+									</div>
+								</div>
+						</section>
+
+							</ul> </br></br></br></br></br></br>
+							<div class="copyright">&copy; Made by <a href="https://github.com/denisolt">Deni Shakh</a>. Thanks to <a href="https://github.com/msdocs">Mahmoud Saleh</a> for the front-end.</div>
 						</div>
+
 						<div class="image">
 							{% if uploadingimage %}
 							<img src="data:static/image/png;base64, {{uploadingimage}} " height="90%" />
