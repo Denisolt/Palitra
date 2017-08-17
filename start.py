@@ -101,7 +101,6 @@ def upload_file(x=x, uploadingimage=uploadingimage):
             im = im.resize((150, 150))
             x = GetnewColors()
         return render_template('index.html', x = x, uploadingimage=uploadingimage)
-    x = GetnewColors()
     return render_template('index.html', x = x, uploadingimage=uploadingimage)
 
 
